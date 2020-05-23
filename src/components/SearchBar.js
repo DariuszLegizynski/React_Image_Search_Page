@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SearchBar(){
+function SearchBar({whenSubmitted}){
     const [inputText, setInputText] = useState("");
 
     function onInputChange(event){
@@ -10,6 +10,8 @@ function SearchBar(){
 
     function onFormSubmit(event){
         event.preventDefault();         //to prevent the form to refresh the whole form
+
+        whenSubmitted(inputText);
     }
 
     return (
