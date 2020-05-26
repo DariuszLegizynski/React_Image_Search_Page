@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const ImageCard = ({image}) => {
     const imgRef = React.useRef();
+    const [spanSize, setSpanSize] = useState(0);
 
     useEffect(() => {
         imgRef.current.addEventListener("load", setSpans);
@@ -10,14 +11,16 @@ const ImageCard = ({image}) => {
         };
     }, []);
 
-    const setSpans = () =>{
-        console.log(imgRef.current.clientHeight);
+    const setSpans = () => {
+        const height = imgRef.current.clientHeight;
+
+        setSpanSize(Math.ceil(height / 10 + 1));
     }
 
 
     const {description, urls} = image;
     return(
-        <div>
+        <div style={{ gridRowEnd: `span ${spanSize}`}}>
             <img
                 ref={imgRef}
                 alt={description}
